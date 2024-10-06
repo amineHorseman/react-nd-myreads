@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
+import {useState,useEffect} from 'react';
 
-const SingleBook = ({book, shelfID}) => {
+const SingleBook = ({book, moveBook}) => {
 
-    const moveToShelf = (event) => {
-        // TODO: complete moveToShelf code
-        return true;
-    };
+    const [newShelf, setNewShelf] = useState(book.shelf);
+
+    // Create an effect to update the book record when the use selects a new shelf
+    useEffect(() => {
+        moveBook(book, newShelf);
+    }, [newShelf, book, moveBook]);
 
     return (
             <div className="book">
@@ -15,28 +18,28 @@ const SingleBook = ({book, shelfID}) => {
                         style={{
                             width: 128,
                             height: 193,
-                            backgroundImage: book.url,
+                            backgroundImage: `url(${book.imageLinks.smallThumbnail})`,
                         }}
                     ></div>
                     <div className="book-shelf-changer">
-                        <select defaultValue={shelfID}
-                            onClick={(event) => moveToShelf(event)}>
+                        <select defaultValue={book.shelf}
+                            onChange={(event) => setNewShelf(event.target.value)}>
                             <option value="none" disabled>
                                 Move to...
                             </option>
                             <option value="currentlyReading"
-                                disabled={shelfID==="currentlyReading"}>Currently Reading</option>
+                                disabled={book.shelf==="currentlyReading"}>Currently Reading</option>
                             <option value="wantToRead"
-                                disabled={shelfID==="wantToRead"}>Want to Read</option>
+                                disabled={book.shelf==="wantToRead"}>Want to Read</option>
                             <option value="read"
-                                disabled={shelfID==="read"}>Read</option>
+                                disabled={book.shelf==="read"}>Read</option>
                             <option value="none"
-                                disabled={shelfID==="none"}>None</option>
+                                disabled={book.shelf==="none"}>None</option>
                         </select>
                     </div>
                 </div>
                 <div className="book-title">{book.title}</div>
-                <div className="book-authors">{book.author}</div>
+                <div className="book-authors">{book.authors.toString()}</div>
             </div>
     );
 }
@@ -44,7 +47,7 @@ const SingleBook = ({book, shelfID}) => {
 
 SingleBook.propTypes = {
     book: PropTypes.object.isRequired,
-    shelfID: PropTypes.string.isRequired,
+    moveBook: PropTypes.func.isRequired,
 }
 
 
