@@ -8,11 +8,9 @@ const SingleShelf = ({shelf, books, moveBook}) => {
         <div className="bookshelf">
             <h2 className="bookshelf-title">{shelf.title}</h2>
             <div className="bookshelf-books">
-                {
-                    <BooksList 
-                        books={filteredBooks}
-                        moveBook={moveBook} />
-                }
+                <BooksList 
+                    books={filteredBooks}
+                    moveBook={moveBook} />
             </div>
         </div>
     )

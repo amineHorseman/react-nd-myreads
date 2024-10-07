@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
-const SearchBar = ({showSearchPage, setShowSearchpage, searchQuery, setSearchQuery}) => {
-
+const SearchBar = ({searchQuery, setSearchQuery}) => {
     return (
         <div className="search-books-bar">
-            <a
-                href="#!"
-                className="close-search"
-                onClick={() => setShowSearchpage(!showSearchPage)}>Close</a>
+            <Link 
+                to="/"
+                onClick={() => setSearchQuery("")}
+                className="close-search">Close</Link> 
             <div className="search-books-input-wrapper">
               <input
                 type="text"
@@ -20,8 +20,6 @@ const SearchBar = ({showSearchPage, setShowSearchpage, searchQuery, setSearchQue
 }
 
 SearchBar.propTypes = {
-    showSearchPage: PropTypes.bool.isRequired,
-    setShowSearchpage: PropTypes.func.isRequired,
     searchQuery: PropTypes.string.isRequired,
     setSearchQuery: PropTypes.func.isRequired,
 }

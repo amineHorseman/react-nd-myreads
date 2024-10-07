@@ -3,8 +3,6 @@ import SingleBook from './SingleBook';
 
 const BooksList = ({books, moveBook}) => {
 
-    // TODO: Display book by text filter if shelfID == 'search'
-
     return (
         <ol className="books-grid">
             {
