@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import BooksList from "./BooksList";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const Search = ({searchQuery, setSearchQuery, searchResult, moveBook}) => {
     return (

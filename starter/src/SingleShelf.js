@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import BooksList from "./BooksList";
 
 const SingleShelf = ({shelf, books, moveBook}) => {

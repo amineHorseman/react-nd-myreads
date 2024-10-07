@@ -1,9 +1,10 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Search from "./Search";
 import * as BooksAPI from "./BooksAPI";
+import BookDetails from "./BookDetails";
 
 function App() {
 
@@ -65,22 +66,14 @@ function App() {
     const searchBooks = async (text) => {
       try {
         const result = await BooksAPI.search(text);
-        const modifiedResult = result.map((book) => (
-          { // add 'shelf' property to search results items'
-            shelf: books.filter(x => x.id === book.id).length ?
-              books.filter(x => x.id === book.id)[0].shelf : "none",
-            ...book
-          }
-        ));
-        setSearchResult(Array.isArray(modifiedResult) ? modifiedResult : []);
+        setSearchResult(Array.isArray(result) ? result : []);
       } catch (error) {
         console.log("API Error: cannot search the book in the database.")
         console.log(error);
       }
     }
     searchQuery? searchBooks(searchQuery.trim()) : setSearchResult([]);
-
-  }, [searchQuery, books]);
+  }, [searchQuery]);
 
 
   return (
@@ -98,6 +91,11 @@ function App() {
         setSearchQuery={setSearchQuery}
         searchResult={searchResult}
         moveBook={moveBook}/>}/>
+
+    <Route exact path="/book-details/:id" element={
+      <BookDetails />}/>
+  
+    <Route path="*" element={<Navigate to="/" replace />} />
   </Routes>
   )
 }

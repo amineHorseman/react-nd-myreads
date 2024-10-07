@@ -1,6 +1,6 @@
 import ShelfsList from "./ShelfsList";
 import {Link} from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const Home = ({shelfs, books, moveBook}) => {
     return (
